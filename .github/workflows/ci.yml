@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+
+jobs:
+  conventions:
+    uses: AlejandroAreiza/nestiq/.github/workflows/conventions.yml@main
+
+  quality-gate:
+    uses: AlejandroAreiza/nestiq/.github/workflows/quality-gate.yml@main
+    with:
+      unit-tests-project: tests/NestIQ.CommandService.UnitTests
+      component-tests-project: tests/NestIQ.CommandService.ComponentTests
+      integration-tests-project: tests/NestIQ.CommandService.IntegrationTests
